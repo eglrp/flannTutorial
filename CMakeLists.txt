@@ -12,14 +12,7 @@ project(flannTutorial)
 #link_directories(${PCL_LIBRARY_DIRS})
 #add_definitions(${PCL_DEFINITIONS})
 
-find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)
-find_package(GLEW REQUIRED)
-include_directories(${GLEW_INCLUDE_DIRS})
-link_libraries(${GLEW_LIBRARIES})
-
-
-
 find_package(HDF5 REQUIRED)
 include_directories(${HDF5_INCLUDE_DIR})
 
@@ -40,7 +33,6 @@ target_link_libraries(${PROJECT_NAME}
      pangolin
      Eigen3::Eigen
      ${OPENGL_LIBRARIES}
-     ${GLEW_LIBRARIES}
      )
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
