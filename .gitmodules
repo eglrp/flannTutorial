@@ -1,6 +1,0 @@
-[submodule "deps_src/Pangolin"]
-	path = deps_src/Pangolin
-	url = https://github.com/stevenlovegrove/Pangolin.git
-[submodule "deps_src/flann"]
-	path = deps_src/flann
-	url = https://github.com/mariusmuja/flann.git
