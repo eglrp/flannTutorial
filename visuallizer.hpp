@@ -3,9 +3,7 @@
 
 #include "pangolin/pangolin.h"
 #include <thread>
-#include <vector>
-
-typedef std::vector<std::vector<float>> stdMat;
+#include "datatypes.h"
 
 static const std::string window_name = "HelloPangolinThreads";
 
@@ -41,7 +39,7 @@ private:
         .SetBounds(0.0, 1.0, 0.0, 1.0, -640.0f/480.0f)
         .SetHandler(&handler);
 
-    std::cout << "last element of vector" << pts.back().back() << std::endl;
+    std::cout << "last element of vector: " << pts.back()(2) << std::endl;
     while( !pangolin::ShouldQuit() )
     {
       // Clear screen and activate view to render into
@@ -49,7 +47,8 @@ private:
       d_cam.Activate(s_cam);
 
       // Render OpenGL Cube
-      pangolin::glDrawColouredCube();
+      //pangolin::glDrawColouredCube();
+      pangolin::glDrawPoints(pts);
 
       // Swap frames and Process Events
       pangolin::FinishFrame();

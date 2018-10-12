@@ -3,21 +3,16 @@
 
 #include <stdio.h>
 #include <random>
-
+#include "datatypes.h"
 #include "visuallizer.hpp" 
 
-
-
 void printVecs(stdMat& mat){
-  for (std::vector<float>& v: mat ){
-    for (float &f : v){
-      std::cout << f << " ";
-    }
-    std::cout << std::endl;
+  for (Eigen::Vector3f& v: mat ){
+    std::cout << v(0) << " " << v(1) << " " << v(2)  << std::endl;
   }
 }
 
-stdMat generateRandomStdMat(int numPoints, int dim, float maxRange){
+stdMat generateRandomStdMat(int numPoints, float maxRange ){
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_real_distribution<float> randGen((-1)*maxRange,maxRange);
@@ -25,9 +20,9 @@ stdMat generateRandomStdMat(int numPoints, int dim, float maxRange){
   flann::Matrix<float> flannPts;
   for (int i = 0; i <numPoints; i++ )
   {
-    std::vector<float> temp;
-    for (int j = 0; j < dim; j++){
-      temp.push_back(randGen(gen));
+    Eigen::Vector3f temp;
+    for (int j = 0; j < 3; j++){
+      temp(j)=randGen(gen);
     }
     vecPts.push_back(temp);
   }
@@ -39,9 +34,8 @@ int main(int argc, char** argv)
 {
   // generate some points
   int numPoints = 1000;
-  int dim = 3;
-  int maxRange = 100;
-  stdMat vecs = generateRandomStdMat(numPoints,dim,maxRange);
+  int maxRange = 1;
+  stdMat vecs = generateRandomStdMat(numPoints,maxRange);
   printVecs(vecs);
 
   Vis3D vis;
