@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(flannTutorial)
 
-#set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_CXX_STANDARD 11)
 #set (CMAKE_C_COMPILER /usr/bin/gcc-6)
 #set (CMAKE_CXX_COMPILER /usr/bin/g++-6)
 
