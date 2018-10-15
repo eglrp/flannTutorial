@@ -3,3 +3,5 @@ build/*
 **/*.swp
 **/build
 **/build/**
+CMakeLists.txt.user
+**/CMakeLists.txt.user

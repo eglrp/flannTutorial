@@ -24,7 +24,10 @@ link_directories("${CMAKE_SOURCE_DIR}/../Pangolin/build/src")
 
 
 add_executable(${PROJECT_NAME}
-    main.cpp)
+    main.cpp
+    datatypes.h
+    visuallizer.hpp
+    process.hpp)
 
 target_link_libraries(${PROJECT_NAME}
      ${HDF5_LIBRARIES}

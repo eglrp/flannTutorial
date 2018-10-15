@@ -4,6 +4,7 @@
 #include "pangolin/pangolin.h"
 #include <thread>
 #include "datatypes.h"
+#include <condition_variable>
 
 static const std::string window_name = "HelloPangolinThreads";
 
@@ -21,7 +22,7 @@ private:
       pangolin::GetBoundWindow()->RemoveCurrent();
   }
 
-  void run(const stdMat &pts) {
+  void run(const stdMat &pts,  std::condition_variable& conv) {
     // fetch the context and bind it to this thread
     pangolin::BindToContext(window_name);
 
@@ -54,6 +55,8 @@ private:
       pangolin::FinishFrame();
     }
 
+    conv.notify_all();
+
     // unset the current context from the main thread
     pangolin::GetBoundWindow()->RemoveCurrent();
   }
@@ -63,10 +66,8 @@ public:
     setup();
   }
 
-
-
-  void operator()(const stdMat &pts){
-    run(pts);
+  void operator()(const stdMat &pts, std::condition_variable& conv){
+    run(pts,conv);
   }
 
   void plotPoints(std::vector<std::vector<float>>& mat){
