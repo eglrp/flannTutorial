@@ -53,7 +53,7 @@ public:
     return m_2Vis;
   }
 
-  void process(std::condition_variable& convar){
+  void process(std::condition_variable& convar, std::mutex& dataMutex){
     // generate some points
     int numPoints = 1000;
     int maxRange = 1;
@@ -62,9 +62,12 @@ public:
     std::unique_lock<std::mutex> lck(alwaysLockedMutex);
 
     while(continue_running){
-      generateRandomStdMat(numPoints,maxRange);
+      {
+        std::lock_guard<std::mutex> lk (dataMutex);
+        generateRandomStdMat(numPoints,maxRange);
+      }
       //printVecs(m_2Vis);
-      std::cv_status convar_status = convar.wait_for(lck, std::chrono::seconds(1));
+      std::cv_status convar_status = convar.wait_for(lck, std::chrono::milliseconds(1));
       if (convar_status == std::cv_status::no_timeout)
         continue_running = false;
     }
